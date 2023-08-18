@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String
+  isActive Boolean @default(true)
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  menuOption  Int      @unique @default(0)
+  position  Int      @unique @default(0)
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Consumer {
+  id        String   @id @default(uuid())
+  remoteJid String   @unique
+  position  Int @default(0)
+  menuOption  Int      @unique @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
