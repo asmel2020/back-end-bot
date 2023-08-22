@@ -3,5 +3,5 @@ import { formatValor } from "./formatValor";
 
 
 export const getQuota = (amount: number, quota: number = 1) => {
-  return formatValor(amount * taxes[quota] + amount);
+  return formatValor(amount * taxes[quota]);
 };

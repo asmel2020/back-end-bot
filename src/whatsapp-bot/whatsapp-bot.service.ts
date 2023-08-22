@@ -88,6 +88,7 @@ export class WhatsappBotService {
       consumer = await this.PrismaService.consumer.create({
         data: {
           remoteJid,
+          menuOption: 0,
         },
       });
     }
