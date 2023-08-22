@@ -37,21 +37,18 @@ export class WhatsappBotService {
       let {body} = ctx;
    
       let { menuOption } = await this.getConsumer(remoteJid);
-      console.log(menuOption)
       if (menuOption === 0) {
         const num= Number(body)
-        console.log('paso por aqui')
         if ([1,2].includes(num)) {
-          console.log('paso por aqui - 2')
+      
           if(num === 1){
-            console.log('paso por aqui - 4')
             await this.updateMenuPosition(remoteJid, num);
             await bot.sendMessage(remoteJid,menuMessages[body][0], {});
             return
           }
-          console.log('paso por aqui - 3')
+         
           if(num === 2){
-            console.log('paso por aqui - 5')
+       
             await bot.sendMessage(remoteJid, menuMessages[2][0], {});
             await bot.sendMessage(remoteJid, menuMessages[0][0], {});
             return
