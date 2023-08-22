@@ -39,10 +39,22 @@ export class WhatsappBotService {
       let { menuOption } = await this.getConsumer(remoteJid);
 
       if (menuOption === 0) {
-        if ([1,2/* ,2,3 */].includes(Number(body))) {
-          await this.updateMenuPosition(remoteJid, Number(body));
-          await bot.sendMessage(remoteJid,menuMessages[body][0], {});
-          return
+        const num= Number(body)
+
+        if ([1,2].includes(num)) {
+
+          if(num === 1){
+            await this.updateMenuPosition(remoteJid, num);
+            await bot.sendMessage(remoteJid,menuMessages[num][0], {});
+            return
+          }
+
+          if(num === 2){
+            await bot.sendMessage(remoteJid, menuMessages[2][0], {});
+            await bot.sendMessage(remoteJid, menuMessages[0][0], {});
+            return
+          }
+
         }
         await bot.sendMessage(remoteJid, menuMessages[0][1], {});
         await bot.sendMessage(remoteJid, menuMessages[0][0], {});
@@ -62,12 +74,6 @@ export class WhatsappBotService {
         return
       }
 
-      if (menuOption === 2) {
-        await bot.sendMessage(remoteJid, menuMessages[2][0], {});
-        await this.updateMenuPosition(remoteJid, 0);
-        await bot.sendMessage(remoteJid, menuMessages[0][0], {});
-        return
-      }
     });
 
     bot.on('require_action', async (ctx) => {
@@ -78,10 +84,6 @@ export class WhatsappBotService {
       this.eventEmitter.emit('remove.qr', name);
     });
   }
-
-
-
-
 
 
   async getConsumer(remoteJid: string) {
@@ -104,7 +106,6 @@ export class WhatsappBotService {
   }
 
  
-
   async updateMenuPosition(remoteJid: string, menuOption: number) {
       await this.PrismaService.consumer.update({
         where: {
