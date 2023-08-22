@@ -20,6 +20,9 @@ export const menuMessages = {
       return message;
     },
   },
+  2:{
+    0: 'por favor contacte al siguente numero 100',
+  }
 };
 
 export const OptionsMessage = {

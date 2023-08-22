@@ -39,7 +39,7 @@ export class WhatsappBotService {
       let { menuOption } = await this.getConsumer(remoteJid);
 
       if (menuOption === 0) {
-        if ([1/* ,2,3 */].includes(Number(body))) {
+        if ([1,2/* ,2,3 */].includes(Number(body))) {
           await this.updateMenuPosition(remoteJid, Number(body));
           await bot.sendMessage(remoteJid,menuMessages[body][0], {});
           return
@@ -57,6 +57,13 @@ export class WhatsappBotService {
           return
         }       
         await bot.sendMessage(remoteJid, menuMessages[1][2](body), {});
+        await this.updateMenuPosition(remoteJid, 0);
+        await bot.sendMessage(remoteJid, menuMessages[0][0], {});
+        return
+      }
+
+      if (menuOption === 2) {
+        await bot.sendMessage(remoteJid, menuMessages[2][0], {});
         await this.updateMenuPosition(remoteJid, 0);
         await bot.sendMessage(remoteJid, menuMessages[0][0], {});
         return
