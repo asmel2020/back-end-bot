@@ -3,6 +3,7 @@
 /node_modules
 #whastapp sessions
 /botFiles
+/db
 # Logs
 logs
 *.log

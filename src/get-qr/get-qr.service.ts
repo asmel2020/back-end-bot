@@ -11,7 +11,7 @@ export class GetQrService {
 
     @OnEvent('remove.qr')
     event(nameQr:string){
-      const pathQr=join(process.cwd(),`${nameQr}.qr.png`)
+      const pathQr=join(process.cwd(),`botFiles/${nameQr}.qr.png`)
       if(fs.existsSync(pathQr)){
         fs.rmSync(pathQr);
         return

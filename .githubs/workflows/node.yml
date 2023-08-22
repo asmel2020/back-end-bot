@@ -1,0 +1,51 @@
+name: Node.js CI
+
+on: 
+  push:
+    branches:
+      - main
+    paths:
+      - 'prisma/**'
+      - 'src/**'
+      - '.github/**'
+ 
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name : Install dependencies and Build
+        run: |
+          npm i
+          npm run build
+
+  CD:
+    needs: CI
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ./bot
+          git reset --hard
+          git pull origin main
+          rm .env -f
+          echo > .env
+          echo PORT="${{ secrets.PORT }}" >> .env
+          echo JWT_SECRET="${{ secrets.JWT_SECRET }}" >> .env
+          echo JWT_EXPIRES_IN="${{ secrets.JWT_EXPIRES_IN }}" >> .env
+          echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> .env
+          npm i
+          npm install @ffmpeg-installer/linux-x64 --force
+          npm run build
+          pm2 reload 0
