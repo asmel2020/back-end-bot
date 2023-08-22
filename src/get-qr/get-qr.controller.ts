@@ -16,12 +16,10 @@ export class GetQrController {
   @Get('qr')
   async getQr(@Res() res: Response) {
     const pathQr = join(process.cwd(), 'botFiles/bot-whatsapp.qr.png');
-    let file
     if (existsSync(pathQr)) {
-      file = createReadStream(pathQr);
-      file.pipe(res);
+      createReadStream(pathQr).pipe(res);
     } else {
-      return res.status(404).send({message: 'QR no disponible'});
+      return res.status(404).send({message: 'Qr não está disponível'});
     }
   }
 
