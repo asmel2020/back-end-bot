@@ -37,7 +37,7 @@ export class WhatsappBotService {
       let {body} = ctx;
    
       let { menuOption } = await this.getConsumer(remoteJid);
-
+      console.log(body)
       if (menuOption === 0) {
         const num= Number(body)
 
