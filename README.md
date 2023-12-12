@@ -32,7 +32,7 @@ _build_
 npm run build
 ```
 
-_build_
+_migrate banco do dado_
 
 ```
 npx prisma migrate dev
