@@ -1,5 +1,6 @@
 import { getQuota } from './getQuota';
 import { formatValor } from './formatValor';
+import { taxes } from './taxes';
 
 export const menuMessages = {
   0: {
@@ -10,16 +11,19 @@ export const menuMessages = {
     0: 'Digite o valor :',
     1: 'Valor inválido',
     2: (valor: number) => {
+
       let message: string = '📊 Simulação \n\nValor: ' + formatValor(valor) + '\n';
 
-      for (let index = 0; index < 12; index++) {
+      const key=Object.keys(taxes);
+
+
+      for (let index = 0; index < key.length; index++) {
         message =
           message +
           '\n' +
-          `Crédito x${index + 1} : ${getQuota(valor, index + 1)}`;
+          `Crédito x${key[index]} : ${getQuota(valor, +key[index])}`;
       }
 
-      
       return message;
     },
   },
