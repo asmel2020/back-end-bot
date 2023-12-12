@@ -21,7 +21,7 @@ export const menuMessages = {
     },
   },
   2:{
-    0: "Para mais informações escreva para o seguinte número : "+"+5531983554007",
+    0: "Para mais informações escreva para o seguinte número : +5531983554007",
   }
 };
 
