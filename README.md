@@ -3,7 +3,7 @@
 _Bot Whatsapp_
 
 
-## Construido con 🛠️
+## Construido com 🛠️
 
 _Menciona las herramientas que utilizaste para crear tu proyecto_
 
