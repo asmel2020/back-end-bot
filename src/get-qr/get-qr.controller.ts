@@ -13,7 +13,7 @@ export class GetQrController {
     private readonly eventEmitter: EventEmitter2,
   ) {}
 
-  @Get('qr')
+  @Get()
   async getQr(@Res() res: Response) {
     const pathQr = join(process.cwd(), 'botFiles/bot-whatsapp.qr.png');
     if (existsSync(pathQr)) {

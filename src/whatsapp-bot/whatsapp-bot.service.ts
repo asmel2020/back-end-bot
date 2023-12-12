@@ -32,7 +32,7 @@ export class WhatsappBotService {
 
     
     bot.on('message', async (ctx) => {
-      let { remoteJid, fromMe, id } = ctx.key;
+      let { remoteJid } = ctx.key;
 
       let {body} = ctx;
    
@@ -75,9 +75,13 @@ export class WhatsappBotService {
 
     });
 
+
+
     bot.on('require_action', async (ctx) => {
       this.eventEmitter.emit('new.qr', 'update');
     });
+
+
 
     bot.on('ready', async (ctx) => {
       this.eventEmitter.emit('remove.qr', name);
