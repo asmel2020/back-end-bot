@@ -11,12 +11,15 @@ export const menuMessages = {
     1: 'Valor inválido',
     2: (valor: number) => {
       let message: string = '📊 Simulação \n\nValor: ' + formatValor(valor) + '\n';
+
       for (let index = 0; index < 12; index++) {
         message =
           message +
           '\n' +
           `Crédito x${index + 1} : ${getQuota(valor, index + 1)}`;
       }
+
+      
       return message;
     },
   },

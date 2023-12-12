@@ -37,6 +37,7 @@ export class WhatsappBotService {
       let {body} = ctx;
    
       let { menuOption } = await this.getConsumer(remoteJid);
+      
       if (menuOption === 0) {
         const num= Number(body)
         if ([1,2].includes(num)) {
@@ -80,8 +81,6 @@ export class WhatsappBotService {
     bot.on('require_action', async (ctx) => {
       this.eventEmitter.emit('new.qr', 'update');
     });
-
-
 
     bot.on('ready', async (ctx) => {
       this.eventEmitter.emit('remove.qr', name);
